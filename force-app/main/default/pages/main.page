@@ -1,0 +1,77 @@
+<apex:page sidebar="false" standardController="Hackathon_Image__c" extensions="muleHackController" showheader="false"  standardStylesheets="false" docType="html-5.0" cache="false">
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/css/font-awesome/css/font-awesome.min.css')}" />
+		<apex:stylesheet value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/css/simple-line-icons/simple-line-icons.min.css')}" />
+		<apex:stylesheet value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/css/bootstrap.min.css')}" />
+		<apex:stylesheet value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/css/bootstrap-switch.min.css')}" />
+		<apex:stylesheet value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/css/components.min.css')}" />
+		<apex:stylesheet value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/css/plugins.min.css')}" />
+		<apex:stylesheet value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/css/layout.min.css')}" />
+		<apex:stylesheet value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/css/themes/light2.min.css')}" />
+        <apex:stylesheet value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/css/custom.min.css')}" />	
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.9.1/sweetalert2.css"/>
+    </head>
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-sidebar-closed">
+       
+        <div class="page-container">       
+            <div class="page-content">
+                <div id="map-canvas">
+                    <div class="loader" id="mainloader"></div>
+                </div>
+            </div>
+        </div>
+        <nav class="quick-nav">
+            <a class="quick-nav-trigger" href="#0">
+                <span aria-hidden="true"></span>
+            </a>
+            <ul>
+                <li style="text-align: left;">
+                    <a href="#" id="take_picture" class="active">
+                        <span><h7>Picture</h7></span>
+                        <i class="fa fa-camera fa-7x"></i>
+                    </a>
+                </li>
+            </ul>
+            <span aria-hidden="true" class="quick-nav-bg"></span>
+        </nav>
+        <div class="quick-nav-overlay"></div>
+
+        <div class="modal fade" id="picture_modal" tabindex="-1" role="basic" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body"> 
+          				<input id="picture_info" class="custom-file-input" type="file" accept="image/*;capture=camera" capture="camera" onchange="" />                    	
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="sendpicture" class="btn btn-info btn-lg btn-block btn-circle" onclick="onstart_function();">Save</button>
+                        <button type="button" id="picture_modal_cancel" class="btn btn-info btn-lg btn-block btn-circle">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <apex:form enctype="multipart/form-data">
+            <apex:actionRegion >
+                <apex:actionfunction name="af_submitFile" action="{!post_image}" rerender="myHiddenField" oncomplete="stop_function();"/>
+                <apex:inputHidden value="{!fileData}" id="myHiddenField"/>
+            </apex:actionRegion>
+        </apex:form>
+
+
+    </body>
+
+    <apex:includeScript value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/js/jquery.min.js')}"/>
+    <apex:includeScript value="{!$Resource.mainMule}"/>
+    <apex:includeScript value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/js/bootstrap.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/js/js.cookie.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/js/jquery.slimscroll.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/js/jquery.blockui.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/js/bootstrap-switch.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.mulehack_resources, 'mulehack_resources/js/quick-nav.min.js')}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.9.1/sweetalert2.all.js"></script>
+
+</apex:page>
