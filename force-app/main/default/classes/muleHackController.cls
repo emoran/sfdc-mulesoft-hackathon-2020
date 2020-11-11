@@ -14,7 +14,7 @@ global with sharing class muleHackController {
  
         ContentVersion conVer = new ContentVersion();
         conVer.ContentLocation = 'E'; // to use S specify this document is in Salesforce, to use E for external files
-        conVer.PathOnClient = 'image_'+ Datetime.now() +'.jpeg'; // The files name, extension is very important here which will help the file in preview.
+        conVer.PathOnClient = 'image_'+ Datetime.now() +'.jpg'; // The files name, extension is very important here which will help the file in preview.
         conVer.Title = 'Image_'+Datetime.now(); // Display name of the files
         conVer.VersionData = EncodingUtil.base64Decode(fileData); // converting your binary string to Blog
         conVer.ExternalDataSourceId = '0XC4x000000GnuN';
